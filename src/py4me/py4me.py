@@ -72,7 +72,6 @@ class Connection:
         self.__change_connections()
 
     def __change_connections(self):
-        # self.organizations = OrganizationsApi(self.__url, self._auth.get_token(), self._auth.get_account())
         self.people = PeopleApi(self.__url, self._auth.get_token, self._auth.get_account)
         self.requests = ...
         self.tasks = ...

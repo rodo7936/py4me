@@ -1,6 +1,5 @@
 from datetime import datetime as dt
 
-# from src.py4me.other_models.address import Address
 from src.py4me.serialization import Model
 
 

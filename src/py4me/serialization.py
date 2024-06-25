@@ -70,7 +70,7 @@ class DeSerializer:
     def to_post_patch_method(cls, model: Model) -> dict:
         reqs = model.required_fields
         if not all([getattr(model, k, None) for k in reqs]):
-            raise ValidationError(f"All required field must be set!")
+            raise ValidationError("All required field must be set!")
         return {k: getattr(model, k).deserialize() if isinstance(getattr(model, k), Model) else getattr(model, k) for k
                 in model.fields if k not in model.readonly_fields and getattr(model, k, None) is not None}
 
