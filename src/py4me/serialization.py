@@ -1,56 +1,80 @@
 import logging
 
-from src.exceptions import ValidationError
+from src.py4me.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
 
-class Model:
-    _attributes = {}  # dict of attributes with their types
+class Model(object):
+    _required_fields = {}
+    _fields = {}
+    _readonly_fields = {}
+    _validation = {}
 
-    _read_only = []
+    def __repr__(self):
+        return f"{self.__class__.__name__}({', '.join([f'{k}={getattr(self, k)}' 
+                                                       for k in self.__dict__ 
+                                                       if k in self.fields])})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Model):
+            return False
+        return all([getattr(self, k) == getattr(other, k) for k in self.fields])
+
+    @property
+    def required_fields(self):
+        return self._required_fields
+
+    @property
+    def fields(self):
+        return self._fields
+
+    @classmethod
+    @property
+    def model_fields(cls):
+        return cls._fields
+
+    @property
+    def readonly_fields(self):
+        return self._readonly_fields
 
     def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            if key not in self._attributes:
-                _logger.warning(f'Unknown attribute {key} for {self.__class__.__name__}')
-            elif key in self._read_only:
-                _logger.warning(f'Attribute {key} is read only for {self.__class__.__name__}, skipping')
-            else:
-                setattr(self, key, value)
+        for k, v in kwargs.items():
+            if k not in self._fields:
+                raise ValidationError(f"Key {k} is not supported in model: {self.__class__.__name__}")
+            if k in self._readonly_fields:
+                raise ValidationError(f"Key {k} is readonly in model: {self.__class__.__name__}")
+            setattr(self, k, v)
 
-    def validate(self):
-        for key, value in self.__dict__.items():
-            if key in self._attributes:
-                if not isinstance(value, self._attributes[key]):
-                    raise ValidationError(f'Attribute {key} is not of type {self._attributes[key]}')
+    def _serialize(self, **data):
+        for k, v in data.items():
+            if k not in self._fields:
+                raise ValidationError(f"Key {k} is not supported in model: {self.__class__.__name__}")
+            setattr(self, k, v.serialize() if isinstance(v, Model) else v)
+        return self
 
-    def _serialize(self):
-        ...
+    @classmethod
+    def serialize(cls, **data) -> 'Model':
+        return cls()._serialize(**data)
+
+    def deserialize(self):
+        return DeSerializer.to_post_patch_method(self)
+
+    def to_json(self):
+        return DeSerializer.to_json(self)
 
 
-    def _deserialize(self):
-        ...
+class DeSerializer:
 
+    @classmethod
+    def to_post_patch_method(cls, model: Model) -> dict:
+        reqs = model.required_fields
+        if not all([getattr(model, k, None) for k in reqs]):
+            raise ValidationError(f"All required field must be set!")
+        return {k: getattr(model, k).deserialize() if isinstance(getattr(model, k), Model) else getattr(model, k) for k
+                in model.fields if k not in model.readonly_fields and getattr(model, k, None) is not None}
 
-class Serializer:
-    client_side_validation = False
-    # For future usage maybe
-
-    def __init__(self, obj: Model):
-        self._obj = Model
-
-    def serialize(self, keep_readonly: bool = False):
-        retr = {}
-        if self.client_side_validation:
-            self._obj.validate()
-        for key, value in self._obj.__dict__.items():
-            if key in self._obj._attributes:
-                if key in self._obj._read_only:
-                    if keep_readonly:
-                        retr[key] = value._serialize() if isinstance(value, Model) else value
-                    else:
-                        _logger.warning(f'Attribute {key} is read only for {self._obj.__class__.__name__}, skipping')
-                else:
-                    retr[key] = value
-        return retr
+    @classmethod
+    def to_json(cls, model: Model) -> dict:
+        return {k: getattr(model, k).to_json() if isinstance(getattr(model, k), Model) else getattr(model, k) for k in
+                model.fields if getattr(model, k, None) is not None}
