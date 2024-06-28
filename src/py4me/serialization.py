@@ -22,7 +22,7 @@ class Model(object):
     def __repr__(self):
         return (f"{self.__class__.__name__}"
                 f"({', '.join([f'{k}={getattr(self, k)}' for k in self.__dict__ if k in self.fields])})")
-
+      
     def __eq__(self, other):
         if not isinstance(other, Model):
             return False
