@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py4me',
-    version='alpha.0.0.1',
+    version='0.0.1',
     license='MIT',
     url='https://github.com/rodo7936/py4me',
     description='Python SDK for 4me API',
