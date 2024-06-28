@@ -18,7 +18,7 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@v2.3.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
       with:
         args: >
-          -Dsonar.organization=mojojojo
+          -Dsonar.organization=rodo7936
           -Dsonar.projectKey=rodo7936_py4me
           -Dsonar.python.coverage.reportPaths=coverage.xml
           -Dsonar.sources=src/
