@@ -20,9 +20,7 @@ class Model(object):
             setattr(self, k, v)
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({', '.join([f'{k}={getattr(self, k)}'
-                                                       for k in self.__dict__
-                                                       if k in self.fields])})"
+        return f"{self.__class__.__name__}({', '.join([f'{k}={getattr(self, k)}' for k in self.__dict__ if k in self.fields])})"
 
     def __eq__(self, other):
         if not isinstance(other, Model):
