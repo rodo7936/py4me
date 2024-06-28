@@ -1,5 +1,5 @@
-from src.py4me._api.py4me_api import Api
-from src.py4me.people.models import Person
+from py4me._api.py4me_api import Api
+from py4me.people.models import Person
 
 
 class PeopleApi(Api):

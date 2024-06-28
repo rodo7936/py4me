@@ -12,8 +12,9 @@ setup(
     install_requires=[
         'requests',
     ],
+    include_package_data=True,
     long_description='Python SDK for 4me API',
-    author='Patryk Szczepański',
+    author='rodo7936 - Patryk Szczepański',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

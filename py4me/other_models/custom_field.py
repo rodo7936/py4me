@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.py4me.serialization import Model
+from py4me.serialization import Model
 
 
 class CustomField(Model):

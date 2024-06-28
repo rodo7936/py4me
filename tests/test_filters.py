@@ -1,6 +1,6 @@
 import unittest
 
-from src.py4me.filters import Filter, EqualFilter, GreaterThanFilter, LessThanFilter, NotEqualFilter, \
+from py4me.filters import Filter, EqualFilter, GreaterThanFilter, LessThanFilter, NotEqualFilter, \
     GreaterOrEqualFilter, LessOrEqualFilter, PresentFilter, EmptyFilter, NotInFilter, InFilter, \
     GreaterThanLessThanFilter, GreaterEqualLessEqualFilter
 

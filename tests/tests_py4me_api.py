@@ -1,10 +1,10 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from src.py4me._api.py4me_api import ListMethodBuilder, StatusCodeHandler, Api
-from src.py4me.exceptions import InvalidUrlException, InvalidTokenException, SemanticException, \
+from py4me._api.py4me_api import ListMethodBuilder, StatusCodeHandler, Api
+from py4me.exceptions import InvalidUrlException, InvalidTokenException, SemanticException, \
     TooManyRequestsException, ApiError, BadFilterException, BadSortFieldException
-from src.py4me.filters import EqualFilter
+from py4me.filters import EqualFilter
 
 
 class TestListMethodBuilder(unittest.TestCase):
@@ -124,7 +124,7 @@ class TestApi(unittest.TestCase):
     def test_header(self):
         self.assertEqual(self.api.header, {'Authorization': 'Bearer test', 'X-4me-Account': 'test'})
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_predefined_filter(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -137,7 +137,7 @@ class TestApi(unittest.TestCase):
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'},
                                          params={'per_page': 100})
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_predefined_filter_non_avaiable(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -147,7 +147,7 @@ class TestApi(unittest.TestCase):
         with self.assertRaises(BadFilterException):
             self.api.list(predefined_filter='disabled')
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_sort(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -160,7 +160,7 @@ class TestApi(unittest.TestCase):
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'},
                                          params={'per_page': 100, 'sort': 'name'})
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_sort_non_avaiable(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -170,7 +170,7 @@ class TestApi(unittest.TestCase):
         with self.assertRaises(BadSortFieldException):
             self.api.list(sort='name')
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_fields(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -183,7 +183,7 @@ class TestApi(unittest.TestCase):
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'},
                                          params={'per_page': 100, 'fields': 'name'})
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_fields_non_avaiable(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -193,7 +193,7 @@ class TestApi(unittest.TestCase):
         with self.assertRaises(BadFilterException):
             self.api.list(fields=['name'])
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_list_predefined_filter_and_filters(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -205,7 +205,7 @@ class TestApi(unittest.TestCase):
         with self.assertRaises(BadFilterException):
             self.api.list(predefined_filter='disabled', filters=[EqualFilter(field='name', value='test')])
 
-    @patch('src.py4me._api.py4me_api.get_')
+    @patch('py4me._api.py4me_api.get_')
     def test_get(self, mock_get):
         response = Mock()
         response.status_code = 200
@@ -216,7 +216,7 @@ class TestApi(unittest.TestCase):
         mock_get.assert_called_once_with(url='https://api.4me.com/test/1',
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'})
 
-    @patch('src.py4me._api.py4me_api.post_')
+    @patch('py4me._api.py4me_api.post_')
     def test_post(self, mock_post):
         response = Mock()
         response.status_code = 201
@@ -228,7 +228,7 @@ class TestApi(unittest.TestCase):
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'},
                                          json={'data': 'test'})
 
-    @patch('src.py4me._api.py4me_api.patch_')
+    @patch('py4me._api.py4me_api.patch_')
     def test_patch(self, mock_patch):
         response = Mock()
         response.status_code = 200
@@ -240,7 +240,7 @@ class TestApi(unittest.TestCase):
                                          headers={'Authorization': 'Bearer test', 'X-4me-Account': 'test'},
                                          json={'data': 'test'})
 
-    @patch('src.py4me._api.py4me_api.put_')
+    @patch('py4me._api.py4me_api.put_')
     def test_put(self, mock_put):
         response = Mock()
         response.status_code = 200

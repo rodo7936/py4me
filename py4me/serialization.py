@@ -1,6 +1,6 @@
 import logging
 
-from src.py4me.exceptions import ValidationError
+from py4me.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 

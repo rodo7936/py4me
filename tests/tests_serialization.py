@@ -1,5 +1,6 @@
 import unittest
-from src.py4me.serialization import DeSerializer, ValidationError, Model
+from py4me.exceptions import ValidationError
+from py4me.serialization import Model
 
 
 

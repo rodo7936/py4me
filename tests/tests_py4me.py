@@ -1,8 +1,8 @@
 import unittest
 
-from src.py4me.auth.auth import PATAuth, Auth
-from src.py4me.exceptions import InvalidEnvironmentException, InvalidRegionException
-from src.py4me.py4me import Connection, Environment, Py4meUrl, Region
+from py4me.auth.auth import PATAuth
+from py4me.exceptions import InvalidEnvironmentException, InvalidRegionException
+from py4me.py4me import Connection, Environment, Py4meUrl, Region
 
 
 class TestConnection(unittest.TestCase):

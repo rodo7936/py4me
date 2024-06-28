@@ -2,10 +2,10 @@ from abc import ABC
 
 from requests import get as get_, patch as patch_, post as post_, put as put_
 
-from src.py4me.exceptions import (BadFilterException, BadSortFieldException, InvalidUrlException,
-                                  InvalidTokenException, ObjectNotFound, SemanticException, TooManyRequestsException,
-                                  ApiError)
-from src.py4me.filters import Filter
+from py4me.exceptions import (BadFilterException, BadSortFieldException, InvalidUrlException,
+                              InvalidTokenException, ObjectNotFound, SemanticException, TooManyRequestsException,
+                              ApiError)
+from py4me.filters import Filter
 
 
 class ListMethodBuilder:
@@ -96,11 +96,11 @@ class Api(ABC):
         }
 
     def list(self,
-               fields: list[str] = None,
-               predefined_filter: str | None = None,
-               filters: list | None = None,
-               sort: str | None = None
-               ):
+             fields: list[str] = None,
+             predefined_filter: str | None = None,
+             filters: list | None = None,
+             sort: str | None = None
+             ):
         if predefined_filter and predefined_filter.lower() not in self.avaiable_predefined_filters:
             raise BadFilterException(f'Predefined filter {predefined_filter} is not available for this endpoint.')
         if sort and sort.lower() not in self.sortable_fields:
