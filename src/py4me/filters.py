@@ -88,8 +88,8 @@ class NotInFilter(Filter):
     """
 
     def as_param(self):
-        if self.value.__iter__:
-            return {self.field: f'!{",".join(self.value)}'}
+        if isinstance(self.value, (list, tuple, set)):
+            return {self.field: f'!{",".join([str(v) for v in self.value])}'}
         if isinstance(self.value, str):
             return {self.field: f'!{self.value}'}
 
@@ -100,7 +100,7 @@ class InFilter(Filter):
     """
 
     def as_param(self):
-        if self.value.__iter__:
+        if isinstance(self.value, (list, tuple, set)):
             return {self.field: f'{",".join(self.value)}'}
         if isinstance(self.value, str):
             return {self.field: f'{self.value}'}
@@ -112,17 +112,17 @@ class GreaterThanLessThanFilter(Filter):
     """
 
     def as_param(self):
-        if not self.value.__iter__:
-            raise ValueError('Value must be an iterable, e.g. list or tuple')
+        if not isinstance(self.value, (list, tuple, set)):
+            raise ValueError('Value must be an list, tuple or set')
         return {self.field: '>{}<{}'.format(self.value[0], self.value[1])}
 
 
-class GreaterThanEqualLessThanEqualFilter(Filter):
+class GreaterEqualLessEqualFilter(Filter):
     """
     Filter for checking if field is greater or equal to value and less or equal to value
     """
 
     def as_param(self):
-        if not self.value.__iter__:
-            raise ValueError('Value must be an iterable, e.g. list or tuple')
+        if not isinstance(self.value, (list, tuple, set)):
+            raise ValueError('Value must be an list, tuple or set')
         return {self.field: '>={}<={}'.format(self.value[0], self.value[1])}

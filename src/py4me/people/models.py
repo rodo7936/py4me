@@ -73,14 +73,6 @@ class Person(Model):
     }
 
     _validation = {
-        'authenticationID': {'max_length': 128},
-        'employeeID': {'max_length': 128},
-        'job_title': {'max_length': 80},
-        'locale': {'max_length': 5},
-        'location': {'max_length': 80},
-        'name': {'max_length': 128},
-        #            'information': {'max_length': 1024},  Teorically the max is 64kb, but we can't validate this
     }
 
 
-# Address, Attachment, Currency, Contact, CustomField, NotificationEnum, Organization, Site, TimeZone, UiExtension

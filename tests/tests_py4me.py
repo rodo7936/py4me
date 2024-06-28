@@ -44,6 +44,17 @@ class TestPy4MeUrl(unittest.TestCase):
         with self.assertRaises(InvalidRegionException):
             Py4meUrl(Environment.QA, 'invalid')
 
+    def test_change_environment(self):
+        conn = Connection(region='us', environment='prod', auth=self.dummy_auth)
+        conn.change_environment('qa')
+        self.assertEqual(conn._environment, Environment.QA)
+
+    def test_change_region(self):
+        conn = Connection(region='us', environment='prod', auth=self.dummy_auth)
+        conn.change_region('uk')
+        self.assertEqual(conn._region, Region.UNITED_KINGDOM)
+
+
 
 if __name__ == '__main__':
     unittest.main()
