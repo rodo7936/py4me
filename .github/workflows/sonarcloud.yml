@@ -21,7 +21,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Coverage test
         run: |
-          python3 -m coverage run -m unittest -s ./tests
+          python3 -m coverage run -m unittest
           python3 -mcoverage report -m
           python3 -m coverage xml -o coverage.xml
      
