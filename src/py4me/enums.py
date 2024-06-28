@@ -103,7 +103,7 @@ class Locale(str, Enum):
     sr_latin = 'sr@Latin'  # Serbian (Latin)
     sl = 'sl'  # Slovenian
     ta = 'ta'  # Tamil
-    mk = 'mk'  # Macedonian
+    mk = 'mk'  # Macedonia
 
 
 class AddressLabel(str, Enum):

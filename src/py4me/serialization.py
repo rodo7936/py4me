@@ -11,9 +11,17 @@ class Model(object):
     _readonly_fields = {}
     _validation = {}
 
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            if k not in self._fields:
+                raise ValidationError(f"Key {k} is not supported in model: {self.__class__.__name__}")
+            if k in self._readonly_fields:
+                raise ValidationError(f"Key {k} is readonly in model: {self.__class__.__name__}")
+            setattr(self, k, v)
+
     def __repr__(self):
-        return f"{self.__class__.__name__}({', '.join([f'{k}={getattr(self, k)}' 
-                                                       for k in self.__dict__ 
+        return f"{self.__class__.__name__}({', '.join([f'{k}={getattr(self, k)}'
+                                                       for k in self.__dict__
                                                        if k in self.fields])})"
 
     def __eq__(self, other):
@@ -37,14 +45,6 @@ class Model(object):
     @property
     def readonly_fields(self):
         return self._readonly_fields
-
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            if k not in self._fields:
-                raise ValidationError(f"Key {k} is not supported in model: {self.__class__.__name__}")
-            if k in self._readonly_fields:
-                raise ValidationError(f"Key {k} is readonly in model: {self.__class__.__name__}")
-            setattr(self, k, v)
 
     def _serialize(self, **data):
         for k, v in data.items():
