@@ -21,9 +21,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Coverage test
         run: |
-          coverage run -m unittest -s ./tests
-          coverage report -m
-          coverage xml -o coverage.xml
+          python3 -m coverage run -m unittest -s ./tests
+          python3 -mcoverage report -m
+          python3 -m coverage xml -o coverage.xml
      
           ls
           if [ $? -eq 0 ]; then
