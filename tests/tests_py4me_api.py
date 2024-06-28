@@ -11,10 +11,10 @@ class TestListMethodBuilder(unittest.TestCase):
 
     def test_deafault_param(self):
         builder = ListMethodBuilder('test')
-        self.assertEqual(builder.fields, None)
-        self.assertEqual(builder.sort, None)
-        self.assertEqual(builder.filters, None)
-        self.assertEqual(builder.predefined_filter, None)
+        self.assertIsNone(builder.fields)
+        self.assertIsNone(builder.sort)
+        self.assertIsNone(builder.filters)
+        self.assertIsNone(builder.predefined_filter)
         self.assertEqual(builder.raw_uri, 'test')
         self.assertEqual(builder.uri, 'test')
         self.assertEqual(builder._params, {'per_page': 100})
