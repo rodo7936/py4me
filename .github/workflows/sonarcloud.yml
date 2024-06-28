@@ -19,8 +19,20 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install tox and any other packages
         run: pip install -r requirements.txt
-      - name: Run tox
-        run: tox -e py
+      - name: Coverage test
+        run: |
+          coverage run -m unitest -s ./tests
+          coverage report -m
+          coverage xml -o coverage.xml
+     
+          ls
+          if [ $? -eq 0 ]; then
+              echo "##vso[task.setvariable variable=status]succeeded"
+              echo "The tests were successful!"; exit 0;
+          else
+              echo "##vso[task.setvariable variable=status]failed"
+              echo "The tests have failed!"; exit 1;
+          fi
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
