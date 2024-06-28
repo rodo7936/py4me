@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py4me',
-    version='0.0.1a',
+    version='0.0.2',
     license='MIT',
     url='https://github.com/rodo7936/py4me',
     description='Python SDK for 4me API',
@@ -18,6 +18,7 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
+        'Intended Audience :: Administrators',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',

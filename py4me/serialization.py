@@ -1,8 +1,4 @@
-import logging
-
 from py4me.exceptions import ValidationError
-
-_logger = logging.getLogger(__name__)
 
 
 class Model(object):
