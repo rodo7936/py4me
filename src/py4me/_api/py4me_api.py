@@ -132,19 +132,19 @@ class Api(ABC):
                                           headers=self.header)).run()
         return response.json()
 
-    def post(self, data: dict):
+    def create(self, data: dict):
         response = StatusCodeHandler(post_(url=self.uri,
                                            headers=self.header,
                                            json=data)).run()
         return response.json()
 
-    def patch(self, id_: int, data: dict):
+    def update(self, id_: int, data: dict):
         response = StatusCodeHandler(patch_(url=f'{self.uri}/{id_}',
                                             headers=self.header,
                                             json=data)).run()
         return response.json()
 
-    def put(self, id_: int, data: dict):
+    def update_create(self, id_: int, data: dict):
         response = StatusCodeHandler(put_(url=f'{self.uri}/{id_}',
                                           headers=self.header,
                                           json=data)).run()

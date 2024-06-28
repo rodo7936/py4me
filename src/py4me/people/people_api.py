@@ -48,7 +48,7 @@ class PeopleApi(Api):
 
     def create(self, model: Person) -> Person:
         model = model.deserialize()
-        return Person.serialize(**super().post(model))
+        return Person.serialize(**super().create(model))
 
     def list(
             self,
@@ -64,4 +64,4 @@ class PeopleApi(Api):
 
     def update(self, model: Person) -> Person:
         deserialized = model.deserialize()
-        return Person.serialize(**super().patch(id_=model.id, data=deserialized))
+        return Person.serialize(**super().update(id_=model.id, data=deserialized))
