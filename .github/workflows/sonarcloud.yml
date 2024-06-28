@@ -1,40 +1,28 @@
-name: Build
 on:
+
   push:
     branches:
-      - main
+      - master
   pull_request:
-    types: [opened, synchronize, reopened]
+      types: [opened, synchronize, reopened]
+name: Main Workflow
 jobs:
   sonarcloud:
-    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Install tox and any other packages
-        run: pip install -r requirements.txt
-      - name: Coverage test
-        run: |
-          python3 -m coverage run -m unittest
-          python3 -mcoverage report -m
-          python3 -m coverage xml -o coverage.xml
-     
-          ls
-          if [ $? -eq 0 ]; then
-              echo "##vso[task.setvariable variable=status]succeeded"
-              echo "The tests were successful!"; exit 0;
-          else
-              echo "##vso[task.setvariable variable=status]failed"
-              echo "The tests have failed!"; exit 1;
-          fi
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - uses: actions/checkout@v4
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@2.3.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+      with:
+        args: >
+          -Dsonar.organization=mojojojo
+          -Dsonar.projectKey=rodo7936_py4me
+          -Dsonar.python.coverage.reportPaths=coverage.xml
+          -Dsonar.sources=src/
+          -Dsonar.tests=tests/
+          -Dsonar.verbose=true
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
