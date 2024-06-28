@@ -110,3 +110,33 @@ class AddressLabel(str, Enum):
     home = 'home'
     mailing = 'mailing'
 
+
+class RequestCategory(str, Enum):
+    incident = 'incident'
+    rfc = 'rfc'
+    rfi = 'rfi'
+    reservation = 'reservation'
+    order = 'order'
+    fulfillment = 'fulfillment'
+    complaint = 'complaint'
+    compliment = 'compliment'
+    other = 'other'
+
+
+class RequestCompletionReason(str, Enum):
+    solved = 'solved'
+    workaround = 'workaround'
+    gone = 'gone'
+    duplicate = 'duplicate'
+    withdrawn = 'withdrawn'
+    no_reply = 'no_reply'
+    rejected = 'rejected'
+    conflict = 'conflict'
+    declined = 'declined'
+    unsolvable = 'unsolvable'
+
+
+class RequestGrouping(str, Enum):
+    none = 'none'
+    grouped = 'grouped'
+    group = 'group'
