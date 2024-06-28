@@ -1,5 +1,5 @@
 import unittest
-from src.py4me.enums import Locale, Plan, Currency, AddressLabel
+from py4me.enums import Locale, Plan, Currency, AddressLabel
 
 
 class TestEnums(unittest.TestCase):

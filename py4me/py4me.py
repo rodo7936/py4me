@@ -1,8 +1,8 @@
 from enum import Enum
 
-from src.py4me.auth.auth import Auth
-from src.py4me.exceptions import InvalidEnvironmentException, InvalidRegionException
-from src.py4me.people.people_api import PeopleApi
+from py4me.auth.auth import Auth
+from py4me.exceptions import InvalidEnvironmentException, InvalidRegionException
+from py4me.people.people_api import PeopleApi
 
 
 class Py4meUrl:

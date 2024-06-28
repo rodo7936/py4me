@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 
-from src.py4me.serialization import Model
+from py4me.serialization import Model
 
 
 class Person(Model):
