@@ -110,3 +110,67 @@ class AddressLabel(str, Enum):
     home = 'home'
     mailing = 'mailing'
 
+
+class RequestCategory(str, Enum):
+    incident = 'incident'
+    rfc = 'rfc'
+    rfi = 'rfi'
+    reservation = 'reservation'
+    order = 'order'
+    fulfillment = 'fulfillment'
+    complaint = 'complaint'
+    compliment = 'compliment'
+    other = 'other'
+
+
+class RequestCompletionReason(str, Enum):
+    solved = 'solved'
+    workaround = 'workaround'
+    gone = 'gone'
+    duplicate = 'duplicate'
+    withdrawn = 'withdrawn'
+    no_reply = 'no_reply'
+    rejected = 'rejected'
+    conflict = 'conflict'
+    declined = 'declined'
+    unsolvable = 'unsolvable'
+
+
+class RequestGrouping(str, Enum):
+    none = None
+    group = 'group'
+    grouped = 'grouped'
+
+
+class RequestImpact(str, Enum):
+    low = 'low'
+    medium = 'medium'
+    high = 'high'
+    top = 'top'
+
+
+class MajorIncidentStatus(str, Enum):
+    proposed = 'proposed'
+    rejected = 'rejected'
+    accepted = 'accepted'
+    resolved = 'resolved'
+    canceled = 'canceled'
+
+
+class RequestSatisfaction(str, Enum):
+    satisfied = 'satisfied'
+    dissatisfied = 'dissatisfied'
+
+
+class RequestStatus(str, Enum):
+    declined = 'declined'
+    on_backlog = 'on_backlog'
+    assigned = 'assigned'
+    accepted = 'accepted'
+    in_progress = 'in_progress'
+    waiting_for = 'waiting_for'
+    waiting_for_customer = 'waiting_for_customer'
+    reservation_pending = 'reservation_pending'
+    workflow_pending = 'workflow_pending'
+    project_pending = 'project_pending'
+    completed = 'completed'

@@ -46,12 +46,12 @@ class Person(Model):
         'attachments': list['Attachment'],
         'contacts': list['Contact'],
         'ui_extension': 'UiExtension',
-        'color_mode': str,  # non_prod: Pre-prod only
-        'formats': str,  # non_prod: Pre-prod only
-        'play_private_chat_sound':  str,  # non_prod: Pre-prod only
-        'play_support_chat_sound': str,  # non_prod: Pre-prod only
-        'show_private_chat_popup': str,  # non_prod: Pre-prod only
-        'show_support_chat_popup': str,  # non_prod: Pre-prod only
+        'color_mode': str,
+        'formats': str,
+        'play_private_chat_sound':  str,
+        'play_support_chat_sound': str,
+        'show_private_chat_popup': str,
+        'show_support_chat_popup': str,
 
     }
 

@@ -108,8 +108,6 @@ class Api(ABC):
         if fields:
             if not all([field.lower() in self.collection_fields for field in fields]):
                 raise BadFilterException(f'Fields {fields} are not available for this endpoint.')
-        if predefined_filter and filters:
-            raise BadFilterException('You can not use predefined filter and filters at the same time.')
         uri, params = ListMethodBuilder(raw_uri=self.uri,
                                         fields=fields,
                                         predefined_filter=predefined_filter,
