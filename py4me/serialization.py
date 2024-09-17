@@ -1,5 +1,4 @@
 from py4me.exceptions import ValidationError
-from py4me.py4me import Connection
 
 
 class Model(object):
