@@ -1,9 +1,9 @@
 from py4me._api.py4me_api import Api
-from py4me.organizations.models import Organization
+from py4me.requests.models import Request
 
 
-class OrganizationApi(Api):
-    model = Organization
+class RequestApi(Api):
+    model = Request
     avaiable_predefined_filters = [
         'completed',
         'open',
@@ -56,7 +56,7 @@ class OrganizationApi(Api):
         'member',
         'template',
         'major_incident_status',
-        'organization'
+        'Request'
     ]
 
     def __init__(self, url: str, token: str, account: str) -> None:
@@ -64,12 +64,12 @@ class OrganizationApi(Api):
             url=url,
             token=token,
             account=account,
-            endpoint='organizations',
+            endpoint='requests',
         )
 
-    def create(self, model: Organization) -> Organization:
+    def create(self, model: Request) -> Request:
         model = model.deserialize()
-        return Organization.serialize(**super().create(model))
+        return Request.serialize(**super().create(model))
 
     def list(
             self,
@@ -78,11 +78,11 @@ class OrganizationApi(Api):
             filters: list | None = None,
             sort: str | None = None
     ):
-        return [Organization.serialize(**o) for o in super().list(fields, predefined_filter, filters, sort)]
+        return [Request.serialize(**r) for r in super().list(fields, predefined_filter, filters, sort)]
 
-    def get(self, id_: int) -> Organization:
-        return Organization.serialize(**super().get(id_))
+    def get(self, id_: int) -> Request:
+        return Request.serialize(**super().get(id_))
 
-    def update(self, model: Organization) -> Organization:
+    def update(self, model: Request) -> Request:
         deserialized = model.deserialize()
-        return Organization.serialize(**super().update(id_=model.id, data=deserialized))
+        return Request.serialize(**super().update(id_=model.id, data=deserialized))

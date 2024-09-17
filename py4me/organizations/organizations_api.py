@@ -2,7 +2,7 @@ from py4me._api.py4me_api import Api
 from py4me.organizations.models import Organization
 
 
-class OrganizationApi(Api):
+class OrganizationsApi(Api):
     model = Organization
     avaiable_predefined_filters = [
         'disabled',
@@ -11,7 +11,7 @@ class OrganizationApi(Api):
         'internal',
         'trusted',
         'directory',
-        'support_domain'
+        'support_domain',
         'managed_by_me'
     ]
     sortable_fields = [
