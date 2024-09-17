@@ -3,7 +3,6 @@ from py4me.exceptions import ValidationError
 from py4me.serialization import Model
 
 
-
 class TestModel(unittest.TestCase):
     def test_model_init_raise_exception(self):
         with self.assertRaises(ValidationError):
