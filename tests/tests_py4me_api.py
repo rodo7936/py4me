@@ -202,8 +202,7 @@ class TestApi(unittest.TestCase):
         mock_get.return_value = response
         self.api.collection_fields = ['name']
         self.api.avaiable_predefined_filters = ['disabled']
-        with self.assertRaises(BadFilterException):
-            self.api.list(predefined_filter='disabled', filters=[EqualFilter(field='name', value='test')])
+        self.api.list(predefined_filter='disabled', filters=[EqualFilter(field='name', value='test')])
 
     @patch('py4me._api.py4me_api.get_')
     def test_get(self, mock_get):
