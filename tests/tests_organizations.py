@@ -46,7 +46,7 @@ class TestOrganization(unittest.TestCase):
         ]
         self.assertListEqual(OrganizationsApi.sortable_fields, expected_fields)
 
-    def stest_ortable_fields_do_not_include_unexpected_values(self):
+    def test_sortable_fields_do_not_include_unexpected_values(self):
         unexpected_fields = [
             'unknown',
             'invalid',

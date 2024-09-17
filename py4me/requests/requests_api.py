@@ -83,6 +83,6 @@ class RequestApi(Api):
     def get(self, id_: int) -> Request:
         return Request.serialize(**super().get(id_))
 
-    def update(self, model: Request) -> Request:
+    def update(self, id_: int, model: Request) -> Request:
         deserialized = model.deserialize()
-        return Request.serialize(**super().update(id_=model.id, data=deserialized))
+        return Request.serialize(**super().update(id_=id_, data=deserialized))

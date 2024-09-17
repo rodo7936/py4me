@@ -61,6 +61,6 @@ class OrganizationsApi(Api):
     def get(self, id_: int) -> Organization:
         return Organization.serialize(**super().get(id_))
 
-    def update(self, model: Organization) -> Organization:
+    def update(self, id_: int, model: Organization) -> Organization:
         deserialized = model.deserialize()
-        return Organization.serialize(**super().update(id_=model.id, data=deserialized))
+        return Organization.serialize(**super().update(id_=id_, data=deserialized))

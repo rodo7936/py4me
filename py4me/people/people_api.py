@@ -62,6 +62,6 @@ class PeopleApi(Api):
     def get(self, id_: int) -> Person:
         return Person.serialize(**super().get(id_))
 
-    def update(self, model: Person) -> Person:
+    def update(self, id_: int, model: Person) -> Person:
         deserialized = model.deserialize()
-        return Person.serialize(**super().update(id_=model.id, data=deserialized))
+        return Person.serialize(**super().update(id_=id_, data=deserialized))
