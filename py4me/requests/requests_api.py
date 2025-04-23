@@ -4,7 +4,7 @@ from py4me.requests.models import Request
 
 class RequestApi(Api):
     model = Request
-    avaiable_predefined_filters = [
+    available_predefined_filters = [
         'completed',
         'open',
         'requested_by_or_for_me',

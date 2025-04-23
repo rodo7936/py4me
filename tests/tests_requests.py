@@ -15,7 +15,7 @@ class TestRequestApi(unittest.TestCase):
             'problem_management_review',
             'sla_accountability'
         ]
-        self.assertListEqual(RequestApi.avaiable_predefined_filters, expected_filters)
+        self.assertListEqual(RequestApi.available_predefined_filters, expected_filters)
 
     def test_predefined_filters_do_not_include_unexpected_values(self):
         unexpected_filters = [
@@ -24,10 +24,10 @@ class TestRequestApi(unittest.TestCase):
             'unsupported'
         ]
         for filter_ in unexpected_filters:
-            self.assertNotIn(filter_, RequestApi.avaiable_predefined_filters)
+            self.assertNotIn(filter_, RequestApi.available_predefined_filters)
 
     def test_predefined_filters_are_unique(self):
-        filters = RequestApi.avaiable_predefined_filters
+        filters = RequestApi.available_predefined_filters
         self.assertEqual(len(filters), len(set(filters)))
 
     def test_sortable_fields_include_all_expected_values(self):
